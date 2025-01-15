@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+    "baseUrl": ".",
+        "paths": {
+        "@/*": ["src/*"],
+            "@components/*": ["src/components/*"],
+            "@api/*": ["src/api/*"],
+            "@store/*": ["src/redux/*"],
+            "@pages/*": ["src/pages/*"],
+            "@theme/*": ["src/theme/*"],
+            "@constants/*": ["src/constants/*"],
+            "@assets/*": ["src/assets/*"],
+            "@filterIcons/*": ["src/assets/filterIcons/*"]
+    }
+},
+    "exclude": ["node_modules", "dist"]
+}

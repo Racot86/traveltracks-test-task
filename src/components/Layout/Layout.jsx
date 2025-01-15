@@ -1,37 +1,46 @@
-/** @jsxImportSource theme-ui */
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import {Drawer} from "@mui/material";
 import {useState} from "react";
+import {theme} from "../../theme/theme.js";
+import Logo from "./components/Logo.jsx";
+import {NavMenu} from "./components/NavMenu.jsx";
 
-export default function Layout() {
+const Layout = ({children}) =>{
     const [drawerOpen, setDrawerOpen] = useState(false);
     const toggleDrawer = () => setDrawerOpen(!drawerOpen)
 
     return (
         <>
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color={'red'}
-                        aria-label="menu"
-                        sx={{variant: 'buttons.primary'}}
-                        onClick={toggleDrawer}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        News
-                    </Typography>
-                    <Button color="inherit">Login</Button>
+        <Box sx={{ flexGrow: 1,padding:0 }}>
+            <AppBar
+                sx={{
+                    backgroundColor:theme.input,
+                    boxShadow:'none',
+                }}
+                position="static">
+                <Toolbar
+                    sx={{
+                        height:'72px',
+                        padding:'0  !important',
+                        position:'relative',
+                    }}
+                >
+                    <Logo />
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            aria-label="menu"
+                            onClick={toggleDrawer}
+                            sx={{display:'none'}}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <NavMenu />
                 </Toolbar>
             </AppBar>
         </Box>
@@ -42,6 +51,8 @@ export default function Layout() {
             >
                 <p>Drawer</p>
             </Drawer>
+            {children}
         </>
     );
 }
+export default Layout;
