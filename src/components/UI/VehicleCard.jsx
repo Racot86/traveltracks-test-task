@@ -2,10 +2,18 @@ import Box from "@mui/material/Box";
 import {theme} from "@theme/theme.js";
 import Typography from "@mui/material/Typography";
 import icoFavorite from '@assets/ico-favorite.svg'
-import icoStar from '@assets/ico-star.svg'
+import ChipsPack from "@components/UI/ChipsPack.jsx";
+import {PrimaryButton} from "@components/UI/PrimaryButton.jsx";
+import {useNavigate} from "react-router-dom";
+import RatingAndLocation from "@components/UI/RatingAndLocation.jsx";
 
 const VehicleCard = ({camper}) => {
-    console.log(camper)
+    const navigate = useNavigate()
+    const navigateToDetails = ()=>{
+        navigate("/catalog/"+camper.id)
+
+    }
+
     const reviewsTextFormatting = (reviews) => {
         if (reviews > 0){
             if (reviews > 1){
@@ -79,18 +87,20 @@ const VehicleCard = ({camper}) => {
                     </Box>
 
                 </Box>
-                <Box
-                    component='div'
+                <RatingAndLocation camper={camper} />
+                <Typography
+                    noWrap
                     sx={{
-                        display: 'flex',
+
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        maxWidth: '525px',
                     }}
                 >
-                    <Box component='img' src={icoStar} sx={{}}/>
-                    <Typography>
-                        {`${camper.rating}${reviewsTextFormatting(camper.reviews.length)}`}
-                    </Typography>
-                </Box>
-
+                    {camper.description}
+                </Typography>
+                <ChipsPack camper={camper} />
+                <PrimaryButton onClick={navigateToDetails} sx={{marginTop:'auto',maxWidth:'173px'}} text='Show more' />
             </Box>
         </Box>
     )

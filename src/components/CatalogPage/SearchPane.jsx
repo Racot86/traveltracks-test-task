@@ -1,18 +1,33 @@
 import Typography from "@mui/material/Typography";
 import {theme} from "@theme/theme.js";
-import {Autocomplete, TextField} from "@mui/material";
 import Box from "@mui/material/Box";
 import FilterCheckBox from "./components/FilterCheckBox.jsx";
 import {filterCheckBoxData} from "@constants/filterCheckBoxData.js";
 import {PrimaryButton} from "@components/UI/PrimaryButton.jsx";
 
+import {useGetCampersQuery} from "@store/slices/apiSlice.js";
+import {useEffect, useState} from "react";
+import LocationSelect from "@components/CatalogPage/components/LocationSelect.jsx";
+
 const SearchPane = () => {
+    const { data: campers} = useGetCampersQuery();
+    const [locations, setLocations] = useState([]);
+
+    useEffect(() => {
+        if (campers && campers.items.length > 0){
+            setLocations([...new Set(campers.items.map(item => item.location))]);
+        }
+    },[campers])
+
     return (
         <>
             <form
                 onSubmit={e => e.preventDefault()}
                 style={{
-                    minWidth:'360px',
+                    display: "flex",
+                    flexDirection: "column",
+                    maxWidth:'360px',
+                    width:'100%',
                     color:theme.text,
                 }}
             >
@@ -20,11 +35,7 @@ const SearchPane = () => {
                     <Typography sx={{...theme.font.body, ...theme.secondary}} color="textSecondary" component="p">
                         Location
                     </Typography>
-                    <Autocomplete
-                        disablePortal
-
-                        renderInput={(params) => <TextField {...params} label="Movie" />}
-                    />
+                    <LocationSelect data={locations} />
                 </Box>
                 <Box component='div'>
                     <Typography>

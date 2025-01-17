@@ -6,10 +6,6 @@ import ResultPane from "@components/CatalogPage/ResultPane.jsx";
  const CatalogPage = () =>{
     const { data: campers, error, isLoading } = useGetCampersQuery();
 
-    if(campers){
-        console.log(campers);
-    }
-
     return (
         <>
             <Box component="div"
@@ -26,6 +22,8 @@ import ResultPane from "@components/CatalogPage/ResultPane.jsx";
                     sx={{
                         height: '100%',
                         display: 'flex',
+                        maxWidth: '360px',
+                        width: '100%',
                     }}
                 >
                     <SearchPane />

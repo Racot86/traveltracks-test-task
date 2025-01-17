@@ -5,7 +5,9 @@ import {HomePage} from "./pages/HomePage.jsx";
 
 import {FavoritesPage} from "./pages/FavoritesPage.jsx";
 
+
 const CatalogPage = lazy(() => import('./pages/CatalogPage.jsx'));
+const DetailsPage = lazy(() => import('./pages/DetailsPage.jsx'));
 
 function App() {
 
@@ -16,6 +18,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<HomePage/>}/>
                         <Route path="/catalog" element={<CatalogPage/>}/>
+                        <Route path="/catalog/:id" element={<DetailsPage/>}/>
                         <Route path="/favorites" element={<FavoritesPage/>}/>
                     </Routes>
                 </Suspense>
