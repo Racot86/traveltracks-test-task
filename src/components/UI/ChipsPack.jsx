@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import {theme} from "@theme/theme.js";
 
 const ChipsPack = ({camper}) => {
-
+    const icons = import.meta.glob('/src/assets/filterIcons/*.svg', { eager: true });
     const getFeatures = (camper) => {
         let features = []
         filterCheckBoxData.filters.forEach(feature => {
@@ -54,7 +54,8 @@ const ChipsPack = ({camper}) => {
                     icon={
                     <Box
                         component='img'
-                        src={feature.ico}
+                        src={icons[`/src/assets/filterIcons/${feature.ico}`]?.default || ''}
+                       
                         sx={{width:'20px',height:'20px'}}
                     />
                     }

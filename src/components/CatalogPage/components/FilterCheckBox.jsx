@@ -9,7 +9,7 @@ const FilterCheckBox = ({data}) =>{
     const handleChange = () => {
         setChecked(!checked)
     };
-
+    const icons = import.meta.glob('/src/assets/filterIcons/*.svg', { eager: true });
     return (
 
             <Box
@@ -32,7 +32,7 @@ const FilterCheckBox = ({data}) =>{
             >
                 <Box
                     component="img"
-                    src={data.ico}
+                    src={icons[`/src/assets/filterIcons/${data.ico}`]?.default || ''}
                     alt={data.text}
                     sx={{ width: 32, height: 32 }}
                 />
