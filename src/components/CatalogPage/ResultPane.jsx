@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectGetPagination, useGetFilters, selectGetCampers } from "@store/selectors.js";
 import { useGetCampersPaginationQuery } from "@store/slices/apiSlice.js";
 import { addCampers, resetCampers } from "@store/slices/campersSlice.js";
+import { setPage, setMaxPages } from "@store/slices/paginationSlice.js";
 import { getActiveFilters, getMaxPages } from "@/utils/functions.js";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const ResultPane = () => {
     const dispatch = useDispatch();
@@ -14,38 +15,28 @@ const ResultPane = () => {
     const filters = useSelector(useGetFilters);
     const reduxCampers = useSelector(selectGetCampers);
 
-    const [page, setPage] = useState(1); // Start from page 1
-    const [maxPages, setMaxPages] = useState(pagination.maxPages);
-
     const { data: camperPage } = useGetCampersPaginationQuery({
-        page: page,
+        page: pagination.currentPage,
         limit: pagination.limit,
         ...getActiveFilters(filters),
     });
 
-    // Load initial campers from Redux on mount
+    // Reset campers and page when filters change
     useEffect(() => {
-        if (reduxCampers.length > 0) {
-            setPage(Math.ceil(reduxCampers.length / pagination.limit) || 1);
-        }
-    }, [reduxCampers, pagination.limit]);
-
-    // Reset campers when filters or pagination parameters change
-    useEffect(() => {
-        dispatch(resetCampers()); // Reset Redux state
-        setPage(1); // Reset to the first page
-    }, [filters, pagination.limit, dispatch]);
+        dispatch(resetCampers());
+        dispatch(setPage(1)); // Reset page to 1
+    }, [filters, dispatch]);
 
     // Update Redux campers and maxPages when new data is fetched
     useEffect(() => {
         if (camperPage) {
             dispatch(addCampers(camperPage.items));
-            setMaxPages(getMaxPages(pagination.limit, camperPage.total));
+            dispatch(setMaxPages(getMaxPages(pagination.limit, camperPage.total)));
         }
     }, [camperPage, pagination.limit, dispatch]);
 
     const handleClick = () => {
-        setPage((prevPage) => prevPage + 1); // Increment the page
+        dispatch(setPage(pagination.currentPage + 1)); // Increment page in Redux
     };
 
     return (
@@ -70,7 +61,7 @@ const ResultPane = () => {
                 {reduxCampers.length > 0 &&
                     reduxCampers.map((camper) => <VehicleCard key={camper.id} camper={camper} />)}
             </Box>
-            {page <= maxPages && (
+            {pagination.currentPage <= pagination.maxPages && (
                 <PrimaryButton onClick={handleClick} text="Load More" variant="outlined" />
             )}
         </Box>
