@@ -1,12 +1,25 @@
 import Box from "@mui/material/Box";
-import {useGetCampersQuery} from "../redux/slices/apiSlice.js";
 import SearchPane from "../components/CatalogPage/SearchPane.jsx";
 import {theme} from "@theme/theme.js";
 import ResultPane from "@components/CatalogPage/ResultPane.jsx";
- const CatalogPage = () =>{
-    const { data: campers, error, isLoading } = useGetCampersQuery();
+import {useDispatch} from "react-redux";
+import {useGetCampersQuery} from "@store/slices/apiSlice.js";
+import {setLocations} from "@store/slices/locationsSlice.js";
+import {useEffect} from "react";
 
-    return (
+
+
+
+ const CatalogPage = () =>{
+     const dispatch = useDispatch();
+     const {data:campers} = useGetCampersQuery()
+     useEffect(()=>{
+         if (campers) {
+             dispatch(setLocations([...new Set(campers.items.map(item => item.location))]));
+         }
+     },[campers, dispatch])
+
+     return (
         <>
             <Box component="div"
                 sx={{

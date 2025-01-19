@@ -25,16 +25,15 @@ const ChipsPack = ({camper}) => {
                     })
                 }
             }else if(feature.category==='trans'){
-                if (camper['transmission']===feature.flag){
+                if (camper['transmission']==='automatic' || camper['transmission']==='manual'){
                     features.push({
                         id: feature.id,
                         ico:feature.ico,
-                        text:feature.text,
+                        text:camper['transmission'],
                     })
                 }
             }
         })
-        console.log(features)
         return features
     }
     return (
@@ -55,7 +54,7 @@ const ChipsPack = ({camper}) => {
                     <Box
                         component='img'
                         src={icons[`/src/assets/filterIcons/${feature.ico}`]?.default || ''}
-                       
+
                         sx={{width:'20px',height:'20px'}}
                     />
                     }

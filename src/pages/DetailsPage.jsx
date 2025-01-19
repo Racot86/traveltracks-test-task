@@ -4,12 +4,11 @@ import {useGetCamperByIdQuery} from "@store/slices/apiSlice.js";
 import RatingAndLocation from "@components/UI/RatingAndLocation.jsx";
 import Typography from "@mui/material/Typography";
 import {PrimaryButton} from "@components/UI/PrimaryButton.jsx";
-import {Tab, Tabs} from "@mui/material";
 import TabList from "@components/DetailsPage/TabList.jsx";
 import {useState} from "react";
 import TabPanels from "@components/DetailsPage/TabPanels.jsx";
 import BookForm from "@components/DetailsPage/BookForm.jsx";
-import ChipsPack from "@components/UI/ChipsPack.jsx";
+
 
 const DetailsPage = () => {
     const {id} = useParams();
@@ -88,13 +87,13 @@ const DetailsPage = () => {
                         display: 'flex',
                     }}
                 >
-                    {!isLoading && !error &&
+
                     <TabPanels
                         value={tabValue}
                         camper={camper}
                         sx={{maxWidth:'631px'}}
                     />
-                    }
+
                     <BookForm />
                 </Box>
 

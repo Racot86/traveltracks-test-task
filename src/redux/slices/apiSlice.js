@@ -13,7 +13,13 @@ export const apiSlice = createApi({
         getCamperById: builder.query({
             query: (id) => `campers/${id}`,
         }),
+        getCampersPagination: builder.query({
+            query: (params) => ({
+                url: 'campers',
+                params: { ...params },
+            }),
+        }),
     }),
 });
 
-export const { useGetCampersQuery, useGetCamperByIdQuery } = apiSlice;
+export const { useGetCampersQuery, useGetCamperByIdQuery,useGetCampersPaginationQuery } = apiSlice;

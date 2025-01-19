@@ -14,6 +14,11 @@ const VehicleCard = ({camper}) => {
 
     }
 
+
+
+
+
+
     const reviewsTextFormatting = (reviews) => {
         if (reviews > 0){
             if (reviews > 1){

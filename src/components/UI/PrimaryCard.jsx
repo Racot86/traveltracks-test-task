@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import {theme} from "@theme/theme.js";
 
-const PrimaryCard = ({bgColor="white", radius="2px",padding="10px",borderColor="black", children})=>{
+const PrimaryCard = ({bgColor="white", radius="2px",padding="10px",borderColor="black", children,sx})=>{
     return (
         <Box
             component="div"
@@ -11,6 +11,8 @@ const PrimaryCard = ({bgColor="white", radius="2px",padding="10px",borderColor="
                 padding: padding,
                 border: `1px solid ${theme.lightGray}`,
                 borderColor: borderColor,
+                flexGrow: 1,
+                ...sx
             }}
         >
             {children}

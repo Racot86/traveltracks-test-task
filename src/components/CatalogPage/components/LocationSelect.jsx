@@ -1,16 +1,18 @@
-
-
 import MenuItem from '@mui/material/MenuItem';
-
 import Select from '@mui/material/Select';
+import {useDispatch, useSelector} from "react-redux";
+import {setFilter} from "@store/slices/filtersSlice.js";
+import {selectGetLocations, useGetFilters} from "@store/selectors.js";
 import {useState} from "react";
 
 
-const LocationSelect = ({data,sx}) => {
-    const [location, setLocation] = useState('');
+const LocationSelect = ({sx, setValue, ...props}) => {
 
+    const [location, setLocation] = useState('');
+    const locations = useSelector(selectGetLocations)
     const handleChange = (event) => {
         setLocation(event.target.value);
+        setValue(event.target.value);
     };
 
     return (
@@ -18,11 +20,13 @@ const LocationSelect = ({data,sx}) => {
                     value={location}
                     onChange={handleChange}
                     sx={{...sx}}
+                    {...props}
+                    fullWidth
                 >
                     <MenuItem value="">
                         <em>Any</em>
                     </MenuItem>
-                    {data.map((item, index) => (
+                    {locations.map((item, index) => (
                         <MenuItem key={index} value={item}>{item}</MenuItem>
                     ))}
                 </Select>
