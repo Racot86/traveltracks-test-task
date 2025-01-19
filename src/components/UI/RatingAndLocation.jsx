@@ -3,7 +3,7 @@ import icoStar from "@assets/ico-star.svg";
 import Typography from "@mui/material/Typography";
 import icoMap from "@assets/ico-map.svg";
 
-const RatingAndLocation = ({camper})=>{
+const RatingAndLocation = ({sx, camper})=>{
     const reviewsTextFormatting = (reviews) => {
         if (reviews > 0){
             if (reviews > 1){
@@ -23,6 +23,7 @@ const RatingAndLocation = ({camper})=>{
                 display: 'flex',
                 gap:'16px',
                 alignItems: 'center',
+                ...sx
             }}
         >
             <Box

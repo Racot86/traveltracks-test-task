@@ -7,27 +7,33 @@ import { PrimaryButton } from "@components/UI/PrimaryButton.jsx";
 
 import { useState } from "react";
 import LocationSelect from "@components/CatalogPage/components/LocationSelect.jsx";
-import { useDispatch } from "react-redux";
-import { setFilter } from "@store/slices/filtersSlice.js";
+import {useDispatch, useSelector} from "react-redux";
+import {setAllFilters, setFilter} from "@store/slices/filtersSlice.js";
 import { resetCampers } from "@store/slices/campersSlice.js";
 import { resetPagination } from "@store/slices/paginationSlice.js";
+import {useGetFilters} from "@store/selectors.js";
+import Heading from "@components/UI/Heading.jsx";
 
 const SearchPane = () => {
     const [location, setLocation] = useState(""); // Track the selected location
     const dispatch = useDispatch();
+    const filtersData = useSelector(useGetFilters);
+    const [filters, setFilters] = useState(filtersData);
 
     const handleSearchClick = () => {
         if (!location) {
             dispatch(setFilter({ name: "location", value: '' }));
-            return;
         }
 
         // Dispatch Redux actions
         dispatch(resetCampers()); // Reset campers
-        dispatch(resetPagination()); // Reset pagination
+        dispatch(resetPagination());
+        dispatch(setAllFilters(filters));// Reset pagination
         dispatch(setFilter({ name: "location", value: location })); // Update location filter in Redux
 
-        console.log("Search initiated with location:", location);
+
+        console.log("filters",filters);
+
     };
 
     return (
@@ -43,19 +49,18 @@ const SearchPane = () => {
                 }}
             >
                 {/* Location Selector */}
-                <Box component="div">
-                    <Typography sx={{ ...theme.font.body, ...theme.secondary }} color="textSecondary" component="p">
+                <Box component="div" sx={{marginBottom:'40px'}}>
+                    <Typography sx={{ ...theme.font.body, ...theme.secondary,marginBottom:'8px' }} color="textSecondary" component="p">
                         Location
                     </Typography>
                     <LocationSelect setValue={(e) => setLocation(e)} />
                 </Box>
 
                 {/* Filters Section */}
-                <Box component="div">
+                <Box component="div" sx={{marginBottom:'40px'}}>
                     <Typography>Filters</Typography>
                     <Box component="div">
-                        <Typography sx={{ color: theme.primary }}>Vehicle equipment</Typography>
-                        <hr />
+                        <Heading text='Vehicle equipment' />
                         <Box
                             component="div"
                             sx={{
@@ -63,16 +68,17 @@ const SearchPane = () => {
                                 flexWrap: "wrap",
                                 gap: "12px",
                                 rowGap: "8px",
+                                marginTop:'24px',
+                                marginBottom:'32px',
                             }}
                         >
                             {filterCheckBoxData.filters.map((item) => (
-                                <FilterCheckBox data={item} key={item.id} />
+                                <FilterCheckBox filters={filters} setFilters={(e)=>setFilters(e)} data={item} key={item.id} />
                             ))}
                         </Box>
                     </Box>
                     <Box component="div">
-                        <Typography sx={{ color: theme.primary }}>Vehicle type</Typography>
-                        <hr />
+                        <Heading text='Vehicle type' />
                         <Box
                             component="div"
                             sx={{
@@ -80,17 +86,18 @@ const SearchPane = () => {
                                 flexWrap: "wrap",
                                 gap: "12px",
                                 rowGap: "8px",
+                                marginTop:'24px'
                             }}
                         >
                             {filterCheckBoxData.vehicle_types.map((item) => (
-                                <FilterCheckBox data={item} key={item.id} />
+                                <FilterCheckBox filters={filters} setFilters={setFilters} data={item} key={item.id} />
                             ))}
                         </Box>
                     </Box>
                 </Box>
 
                 {/* Search Button */}
-                <PrimaryButton onClick={handleSearchClick} type="submit" text="Search" />
+                <PrimaryButton sx={{maxWidth:'166px'}} onClick={handleSearchClick} type="submit" text="Search" />
             </form>
         </>
     );

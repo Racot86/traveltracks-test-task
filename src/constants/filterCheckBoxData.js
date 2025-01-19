@@ -96,17 +96,23 @@ export const filterCheckBoxData = {
         {
             id: 1,
             ico: 'filter-ico-van.svg',
-            text: 'Van'
+            text: 'Van',
+            category:'form',
+            flag:'panelTruck'
         },
         {
             id: 2,
             ico: 'filter-ico-integrated.svg',
-            text: 'Fully Integrated'
+            text: 'Fully Integrated',
+            category:'form',
+            flag:'fullyIntegrated'
         },
         {
             id: 3,
             ico: 'filter-ico-alcove.svg',
-            text: 'Alcove'
+            text: 'Alcove',
+            category:'form',
+            flag:'alcove'
         },
 
     ]

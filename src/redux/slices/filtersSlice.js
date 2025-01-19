@@ -17,6 +17,7 @@ const initialState = {
     water: false,
     diesel: false,
     hybrid: false,
+    form: ''
 };
 
 const filterSlice = createSlice({
@@ -44,9 +45,12 @@ const filterSlice = createSlice({
                 }
             });
         },
+        setAllFilters: (state, action) => {
+            return action.payload;
+        },
     },
 });
 
-export const { toggleFilter, setFilter, resetFilters } = filterSlice.actions;
+export const { toggleFilter, setFilter, resetFilters,setAllFilters } = filterSlice.actions;
 
 export default filterSlice.reducer;

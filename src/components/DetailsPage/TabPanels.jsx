@@ -21,6 +21,7 @@ const TabPanels = ({value, camper, ...other }) => {
                 borderColor={"transparent"}
                 padding={"44px 52px"}
                 radius={'10px'}
+                sx={{height: '588px', display:'flex', flexDirection: 'column'}}
             >
                 <ChipsPack camper={camper} />
                 <VehicleDetails camper={camper} />

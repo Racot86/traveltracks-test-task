@@ -1,12 +1,14 @@
 import * as Yup from 'yup';
 import {Form, Formik, useFormik} from "formik";
-import {TextField} from "@mui/material";
+import {InputAdornment, TextField} from "@mui/material";
 import {PrimaryButton} from "@components/UI/PrimaryButton.jsx";
 import PrimaryCard from "@components/UI/PrimaryCard.jsx";
 import {theme} from "@theme/theme.js";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DatePicker} from "@mui/x-date-pickers";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 const validationSchema = Yup.object({
     name: Yup.string().required('Name is required'),
@@ -31,7 +33,7 @@ const BookForm = () => {
     const textFieldStyles = {
         '& .MuiOutlinedInput-root.Mui-error': {
             '& fieldset': {
-                borderColor: theme.lightGray, // Custom error border color
+                borderColor: theme.input, // Custom error border color
             },
         },
         '& .MuiInputLabel-root': {
@@ -47,20 +49,21 @@ const BookForm = () => {
             color: theme.text,
         },
         '& .MuiOutlinedInput-root': {
-            backgroundColor: theme.lightGray,
+            backgroundColor: theme.input,
             '& fieldset': {
-                borderColor: theme.lightGray,
+                borderColor: theme.input,
 
             },
             '&:hover fieldset': {
-                borderColor: theme.lightGray, //// Customize hover border color
+                borderColor: theme.input, //// Customize hover border color
             },
             '&.Mui-focused fieldset': {
-                borderColor: theme.lightGray, // Customize focus border color
+                borderColor: theme.input, // Customize focus border color
             },
             '& .Mui-error': {
                 background: theme.button.hover, // Error label color
             },
+
         },
     }
 
@@ -71,6 +74,12 @@ const BookForm = () => {
             radius='10px'
             borderColor={theme.lightGray}
         >
+            <Typography sx={{marginBottom:'8px'}}>
+                Book your campervan now
+            </Typography>
+            <Typography sx={{marginBottom:'24px'}}>
+                Stay connected! We are always ready to help you.
+            </Typography>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -87,9 +96,25 @@ const BookForm = () => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 error={touched.name && !!errors.name}
-                                helperText={touched.name && errors.name}
                                 fullWidth
                                 sx={textFieldStyles}
+                                InputProps={{
+                                    endAdornment: (
+                                        touched.name && errors.name && (
+                                            <InputAdornment position="end">
+                                                <Box
+                                                    sx={{
+                                                        color: "red",
+                                                        fontSize: "0.75rem",
+                                                        marginLeft: "8px",
+                                                    }}
+                                                >
+                                                    {errors.name}
+                                                </Box>
+                                            </InputAdornment>
+                                        )
+                                    ),
+                                }}
                             />
 
                             {/* Email Field */}
@@ -101,12 +126,27 @@ const BookForm = () => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 error={touched.email && !!errors.email}
-                                helperText={touched.email && errors.email}
                                 fullWidth
                                 sx={textFieldStyles}
+                                InputProps={{
+                                    endAdornment: (
+                                        touched.name && errors.name && (
+                                            <InputAdornment position="end">
+                                                <Box
+                                                    sx={{
+                                                        color: "red",
+                                                        fontSize: "0.75rem",
+                                                        marginLeft: "8px",
+                                                    }}
+                                                >
+                                                    {errors.email}
+                                                </Box>
+                                            </InputAdornment>
+                                        )
+                                    ),
+                                }}
                             />
 
-                            {/* Date Field */}
                         <DatePicker
                             label="Date"
                             value={values.date}
@@ -124,7 +164,7 @@ const BookForm = () => {
                                     sx: {
                                         color: theme.text, // Customize the icon color
                                     },
-                                }
+                                },
                             }}
                         />
 

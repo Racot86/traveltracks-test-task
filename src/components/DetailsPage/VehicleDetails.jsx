@@ -12,8 +12,8 @@ const VehicleDetails = ({camper}) => {
         margin:0,
     }
     return (
-        <Box>
-            <Heading text='Vehicle Details' />
+        <Box sx={{marginTop:'auto'}}>
+            <Heading sx={{marginBottom:'24px'}} text='Vehicle Details' />
             <Box sx={ulStyle} component='ul'>
                 <li style={liStyle}>
                     <Typography>

@@ -8,6 +8,7 @@ import TabList from "@components/DetailsPage/TabList.jsx";
 import {useState} from "react";
 import TabPanels from "@components/DetailsPage/TabPanels.jsx";
 import BookForm from "@components/DetailsPage/BookForm.jsx";
+import ImageViewer from "@components/UI/ImageViewer.jsx";
 
 
 const DetailsPage = () => {
@@ -15,6 +16,13 @@ const DetailsPage = () => {
     const navigate = useNavigate();
     const {data: camper, isLoading, error} = useGetCamperByIdQuery(id)
     const[tabValue, setTabValue] = useState(0);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [imageSrc, setImageSrc] = useState(null);
+    const handleOpen = (image) => {
+        setImageSrc(image);
+        setIsModalOpen(true);
+    }
+    const handleClose = () => setIsModalOpen(false);
     return (
 
         <Box
@@ -38,7 +46,7 @@ const DetailsPage = () => {
             {!isLoading ? (
             <>
             {camper.name}
-            <RatingAndLocation camper={camper} />
+            <RatingAndLocation sx={{paddingTop:'8px', paddingBottom:'16px'}} camper={camper} />
             <Typography>
                 {`€${camper.price}`}
             </Typography>
@@ -47,6 +55,8 @@ const DetailsPage = () => {
                 sx={{
                     display: "flex",
                     gap: '48px',
+                    paddingBottom:'28px',
+                    paddingTop:'28px',
                 }}
 
             >
@@ -66,43 +76,42 @@ const DetailsPage = () => {
                     >
                     <Box
                         component='img'
-                        src={gallery.original}
+                        src={gallery.thumb}
                         alt={camper.name}
                         sx={{
                             width: '100%',
                             height: '100%',
-                            objectFit: 'cover', /* Scales image to fit without stretching */
+                            objectFit: 'cover',
+                            cursor: 'pointer',
                         }}
+                        onClick={() => handleOpen(gallery.original)}
                     />
                     </Box>
                 ))}
             </Box>
-                <Typography>
+                <Typography sx={{marginBottom:'60px'}}>
                     {camper.description}
                 </Typography>
-                <TabList value={tabValue} valueHandler={setTabValue} />
+                <TabList sx={{marginBottom:'44px'}} value={tabValue} valueHandler={setTabValue} />
                 <Box
                     component='div'
                     sx={{
                         display: 'flex',
+                        gap:'40px'
                     }}
                 >
 
                     <TabPanels
                         value={tabValue}
                         camper={camper}
-                        sx={{maxWidth:'631px'}}
+                        sx={{maxWidth:'631px', height:'588px'}}
                     />
 
                     <BookForm />
                 </Box>
 
-                <hr/>
 
-
-
-
-
+                <ImageViewer open={isModalOpen} handleClose={handleClose} imageSrc={imageSrc} />
             </>
             ): <p>Loading</p>}
         </Box>

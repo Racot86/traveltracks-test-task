@@ -1,7 +1,7 @@
 import {Tab, Tabs} from "@mui/material";
 import {theme} from "@theme/theme.js";
 
-const TabList = ({value, valueHandler}) => {
+const TabList = ({sx, value, valueHandler}) => {
 
     return (
         <Tabs
@@ -22,6 +22,7 @@ const TabList = ({value, valueHandler}) => {
                     backgroundColor: theme.button.main,
                     height: '5px',
                 },
+                ...sx
             }}
         >
             <Tab label="Features"  />
