@@ -40,6 +40,8 @@ const TabPanels = ({value, camper, ...other}) => {
                         flexDirection: 'column',
                         rowGap:'44px',
                         overflow:'scroll',
+                        maxWidth:'631px',
+                        width:'100%',
                     }}
                 >
                     {camper.reviews.map((review, index) => (
