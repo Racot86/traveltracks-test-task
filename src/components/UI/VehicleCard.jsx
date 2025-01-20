@@ -8,33 +8,21 @@ import ChipsPack from "@components/UI/ChipsPack.jsx";
 import { PrimaryButton } from "@components/UI/PrimaryButton.jsx";
 import { useNavigate } from "react-router-dom";
 import RatingAndLocation from "@components/UI/RatingAndLocation.jsx";
-import { useDispatch, useSelector } from "react-redux";
-import { addFavorite, removeFavorite } from "@store/slices/favoritesSlice.js";
-import { isFavoritePresent } from "@store/selectors.js";
+
 
 const VehicleCard = ({sx, camper }) => {
-    const isFavorite = useSelector((state) => isFavoritePresent(state, camper.id));
-    const [pressed, setPressed] = useState(isFavorite);
 
-    const dispatch = useDispatch();
+
+
     const navigate = useNavigate();
 
     const navigateToDetails = () => {
         navigate("/catalog/" + camper.id);
     };
 
-    useEffect(() => {
-        setPressed(isFavorite); // Sync pressed state with Redux
-    }, [isFavorite]);
 
-    const handleFavoriteToggle = () => {
-        setPressed((prev) => !prev);
-        if (!pressed) {
-            dispatch(addFavorite(camper)); // Add to favorites
-        } else {
-            dispatch(removeFavorite(camper.id)); // Remove from favorites
-        }
-    };
+
+
 
     return (
         <Box
@@ -86,9 +74,8 @@ const VehicleCard = ({sx, camper }) => {
                     >
                         <Typography>{`€${camper.price}`}</Typography>
                         <Box
-                            onClick={handleFavoriteToggle}
                             component="img"
-                            src={pressed ? icoFavoritePressed : icoFavorite}
+                            src={icoFavorite}
                             sx={{
                                 width: "24px",
                                 height: "24px",

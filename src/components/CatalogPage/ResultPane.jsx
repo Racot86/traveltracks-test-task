@@ -2,41 +2,48 @@ import VehicleCard from "@components/UI/VehicleCard.jsx";
 import Box from "@mui/material/Box";
 import { PrimaryButton } from "@components/UI/PrimaryButton.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { selectGetPagination, useGetFilters, selectGetCampers } from "@store/selectors.js";
-import { useGetCampersPaginationQuery } from "@store/slices/apiSlice.js";
-import { addCampers, resetCampers } from "@store/slices/campersSlice.js";
-import { setPage, setMaxPages } from "@store/slices/paginationSlice.js";
-import { getActiveFilters, getMaxPages } from "@/utils/functions.js";
-import { useEffect } from "react";
+import {selectCampers, selectPagination, setPage} from "@store/slices/campersSlice.js";
+import {fetchCampers, fetchCampersById} from "@api/apiService.js";
+import {getActiveFilters, getMaxPages} from "@/utils/functions.js";
+import {useGetFilters} from "@store/selectors.js";
+import {useEffect, useState} from "react";
+
 
 const ResultPane = () => {
+
     const dispatch = useDispatch();
-    const pagination = useSelector(selectGetPagination);
+    const campers = useSelector(selectCampers);
+    const {page,per_page,total} = useSelector(selectPagination);
+
     const filters = useSelector(useGetFilters);
-    const reduxCampers = useSelector(selectGetCampers);
+    const [isFetching, setIsFetching] = useState(false);
 
-    const { data: camperPage } = useGetCampersPaginationQuery({
-        page: pagination.currentPage,
-        limit: pagination.limit,
-        ...getActiveFilters(filters),
-    });
+    console.log("campers",campers.length);
+    console.log("campers",campers);
 
-    // Reset campers and page when filters change
     useEffect(() => {
-        dispatch(resetCampers());
-        dispatch(setPage(1)); // Reset page to 1
-    }, [filters, dispatch]);
-
-    // Update Redux campers and maxPages when new data is fetched
-    useEffect(() => {
-        if (camperPage) {
-            dispatch(addCampers(camperPage.items));
-            dispatch(setMaxPages(getMaxPages(pagination.limit, camperPage.total)));
+        if(page===1 && campers.length===0) {
+            console.log('mount fetch');
+            dispatch(fetchCampers({page: 1, limit: 4, filters: {}}));
         }
-    }, [camperPage, pagination.limit, dispatch]);
 
-    const handleClick = () => {
-        dispatch(setPage(pagination.currentPage + 1)); // Increment page in Redux
+    }, []);
+
+
+    const handleLoadMore = async () => {
+
+            if (isFetching) return;
+            setIsFetching(true);
+        if (page<=getMaxPages(per_page,total)) {
+             dispatch(setPage(page + 1));
+            await dispatch(fetchCampers({
+                page: page+1,
+                limit: per_page,
+                filters: getActiveFilters(filters)
+            }));
+        }
+            setIsFetching(false);
+
     };
 
     return (
@@ -58,12 +65,16 @@ const ResultPane = () => {
                     width: "100%",
                 }}
             >
-                {reduxCampers.length > 0 &&
-                    reduxCampers.map((camper) => <VehicleCard key={camper.id} camper={camper} />)}
+                {campers && campers.length > 0 &&
+                campers.map((camper) => (
+                    <VehicleCard key={camper.id} camper={camper} />
+                ))
+                }
+
             </Box>
-            {pagination.currentPage <= pagination.maxPages && (
-                <PrimaryButton onClick={handleClick} text="Load More" variant="outlined" />
-            )}
+
+            {page<=getMaxPages(per_page,total) && <PrimaryButton onClick={handleLoadMore} text="Load More" variant="outlined" />}
+
         </Box>
     );
 };
