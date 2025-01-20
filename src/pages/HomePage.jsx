@@ -29,7 +29,7 @@ export const HomePage = () => {
                         justifyContent: 'start',
                         alignItems: 'start',
                         maxWidth: '576px',
-                        gap:'40px'
+                        gap: '40px'
                     }}
                 >
                     <Box
@@ -46,7 +46,7 @@ export const HomePage = () => {
                             You can find everything you want in our catalog
                         </Typography>
                     </Box>
-                    <PrimaryButton onClick ={()=>navigate('/catalog')} text='View Now'/>
+                    <PrimaryButton onClick={() => navigate('/catalog')} text='View Now'/>
                 </Box>
             </Box>
         </>

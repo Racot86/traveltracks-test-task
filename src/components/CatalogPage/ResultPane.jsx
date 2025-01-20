@@ -1,9 +1,9 @@
 import VehicleCard from "@components/UI/VehicleCard.jsx";
 import Box from "@mui/material/Box";
-import { PrimaryButton } from "@components/UI/PrimaryButton.jsx";
-import { useDispatch, useSelector } from "react-redux";
+import {PrimaryButton} from "@components/UI/PrimaryButton.jsx";
+import {useDispatch, useSelector} from "react-redux";
 import {selectCampers, selectPagination, setPage} from "@store/slices/campersSlice.js";
-import {fetchCampers, fetchCampersById} from "@api/apiService.js";
+import {fetchCampers} from "@api/apiService.js";
 import {getActiveFilters, getMaxPages} from "@/utils/functions.js";
 import {useGetFilters} from "@store/selectors.js";
 import {useEffect, useState} from "react";
@@ -13,16 +13,16 @@ const ResultPane = () => {
 
     const dispatch = useDispatch();
     const campers = useSelector(selectCampers);
-    const {page,per_page,total} = useSelector(selectPagination);
+    const {page, per_page, total} = useSelector(selectPagination);
 
     const filters = useSelector(useGetFilters);
     const [isFetching, setIsFetching] = useState(false);
 
-    console.log("campers",campers.length);
-    console.log("campers",campers);
+    console.log("campers", campers.length);
+    console.log("campers", campers);
 
     useEffect(() => {
-        if(page===1 && campers.length===0) {
+        if (page === 1 && campers.length === 0) {
             console.log('mount fetch');
             dispatch(fetchCampers({page: 1, limit: 4, filters: {}}));
         }
@@ -32,17 +32,17 @@ const ResultPane = () => {
 
     const handleLoadMore = async () => {
 
-            if (isFetching) return;
-            setIsFetching(true);
-        if (page<=getMaxPages(per_page,total)) {
-             dispatch(setPage(page + 1));
+        if (isFetching) return;
+        setIsFetching(true);
+        if (page <= getMaxPages(per_page, total)) {
+            dispatch(setPage(page + 1));
             await dispatch(fetchCampers({
-                page: page+1,
+                page: page + 1,
                 limit: per_page,
                 filters: getActiveFilters(filters)
             }));
         }
-            setIsFetching(false);
+        setIsFetching(false);
 
     };
 
@@ -66,14 +66,15 @@ const ResultPane = () => {
                 }}
             >
                 {campers && campers.length > 0 &&
-                campers.map((camper) => (
-                    <VehicleCard key={camper.id} camper={camper} />
-                ))
+                    campers.map((camper) => (
+                        <VehicleCard key={camper.id} camper={camper}/>
+                    ))
                 }
 
             </Box>
 
-            {page<=getMaxPages(per_page,total) && <PrimaryButton onClick={handleLoadMore} text="Load More" variant="outlined" />}
+            {page <= getMaxPages(per_page, total) &&
+                <PrimaryButton onClick={handleLoadMore} text="Load More" variant="outlined"/>}
 
         </Box>
     );

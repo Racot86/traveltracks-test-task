@@ -1,13 +1,13 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { theme } from "@theme/theme.js";
-import { useEffect, useState } from "react";
+import {theme} from "@theme/theme.js";
+import {useEffect} from "react";
 
-const FilterCheckBox = ({ data, filters, setFilters }) => {
-    const icons = import.meta.glob('/src/assets/filterIcons/*.svg', { eager: true });
+const FilterCheckBox = ({data, filters, setFilters}) => {
+    const icons = import.meta.glob('/src/assets/filterIcons/*.svg', {eager: true});
 
     const handleChange = () => {
-        const updatedFilters = { ...filters, [data.flag]: !filters[data.flag] };
+        const updatedFilters = {...filters, [data.flag]: !filters[data.flag]};
         setFilters(updatedFilters);
     };
 
@@ -87,7 +87,7 @@ const FilterCheckBox = ({ data, filters, setFilters }) => {
                 component="img"
                 src={icons[`/src/assets/filterIcons/${data.ico}`]?.default || ''}
                 alt={data.text}
-                sx={{ width: 32, height: 32 }}
+                sx={{width: 32, height: 32}}
             />
             <Typography>{data.text}</Typography>
         </Box>

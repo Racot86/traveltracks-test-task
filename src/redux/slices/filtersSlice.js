@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     location: "",
@@ -31,7 +31,7 @@ const filterSlice = createSlice({
             }
         },
         setFilter: (state, action) => {
-            const { name, value } = action.payload;
+            const {name, value} = action.payload;
             if (name in state) {
                 state[name] = value;
             }
@@ -51,6 +51,6 @@ const filterSlice = createSlice({
     },
 });
 
-export const { toggleFilter, setFilter, resetFilters,setAllFilters } = filterSlice.actions;
+export const {toggleFilter, setFilter, resetFilters, setAllFilters} = filterSlice.actions;
 
 export default filterSlice.reducer;

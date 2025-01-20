@@ -1,9 +1,7 @@
-
-import { Modal, Box, Typography, IconButton } from "@mui/material";
+import {Box, IconButton, Modal} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import {useState} from "react";
 
-const ImageViewer = ({ imageSrc, open, handleClose }) => {
+const ImageViewer = ({imageSrc, open, handleClose}) => {
     return (
         <Modal
             open={open}
@@ -27,7 +25,7 @@ const ImageViewer = ({ imageSrc, open, handleClose }) => {
             >
                 <Box display="flex" justifyContent="flex-end">
                     <IconButton onClick={handleClose}>
-                        <CloseIcon />
+                        <CloseIcon/>
                     </IconButton>
                 </Box>
                 <Box

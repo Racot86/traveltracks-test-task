@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import {createAsyncThunk} from "@reduxjs/toolkit";
 
 // Set the base URL for axios
 axios.defaults.baseURL = "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/";
@@ -7,7 +7,7 @@ axios.defaults.baseURL = "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/";
 // Fetch campers with pagination and filters
 export const fetchCampers = createAsyncThunk(
     "campers/fetchAll",
-    async ({ page = 1, limit = 4, filters = {} }, thunkAPI) => {
+    async ({page = 1, limit = 4, filters = {}}, thunkAPI) => {
         try {
             const response = await axios.get("/campers", {
                 params: {
@@ -28,9 +28,25 @@ export const fetchCampers = createAsyncThunk(
     }
 );
 
+
+export const fetchLocations = createAsyncThunk(
+    "locations/fetchAll",
+    async (_, thunkAPI) => {
+        try {
+            const response = await axios.get("/campers");
+
+
+            return response.data.items;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.message);
+        }
+    }
+);
+
+
 // Fetch camper by ID
 export const fetchCampersById = createAsyncThunk(
-    "campers/fetchById",
+    "camper/fetchAll",
     async (id, thunkAPI) => {
         try {
             const response = await axios.get(`/campers/${id}`);

@@ -3,31 +3,28 @@ import SearchPane from "../components/CatalogPage/SearchPane.jsx";
 import {theme} from "@theme/theme.js";
 import ResultPane from "@components/CatalogPage/ResultPane.jsx";
 import {useDispatch} from "react-redux";
-import {useGetCampersQuery} from "@store/slices/apiSlice.js";
-import {setLocations} from "@store/slices/locationsSlice.js";
+
+
 import {useEffect} from "react";
+import {fetchLocations} from "@api/apiService.js";
 
 
+const CatalogPage = () => {
+    const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch(fetchLocations());
+    }, [dispatch])
 
- const CatalogPage = () =>{
-     const dispatch = useDispatch();
-     const {data:campers} = useGetCampersQuery()
-     useEffect(()=>{
-         if (campers) {
-             dispatch(setLocations([...new Set(campers.items.map(item => item.location))]));
-         }
-     },[campers, dispatch])
-
-     return (
+    return (
         <>
             <Box component="div"
-                sx={{
-                    padding:'48px 64px',
-                    background:theme.white,
-                    display:'flex',
-                }}
-                gap={8}
+                 sx={{
+                     padding: '48px 64px',
+                     background: theme.white,
+                     display: 'flex',
+                 }}
+                 gap={8}
             >
 
                 <Box
@@ -39,7 +36,7 @@ import {useEffect} from "react";
                         width: '100%',
                     }}
                 >
-                    <SearchPane />
+                    <SearchPane/>
                 </Box>
 
 
@@ -51,7 +48,7 @@ import {useEffect} from "react";
                         width: '100%',
                     }}
                 >
-                    <ResultPane />
+                    <ResultPane/>
                 </Box>
             </Box>
         </>

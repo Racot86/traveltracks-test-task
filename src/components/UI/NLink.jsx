@@ -2,17 +2,17 @@ import {theme} from "../../theme/theme.js";
 import {NavLink, useLocation} from "react-router-dom";
 import {useState} from "react";
 
-export const NLink = ({text, to = '/' }) => {
+export const NLink = ({text, to = '/'}) => {
     const location = useLocation();
     const [isHovered, setIsHovered] = useState(false);
 
     const linkActivityHandler = () => {
         if (to.length > 1 && location.pathname.includes(to)) {
             return theme.button.hover
-        }else {
-            if(to.length === 1 && location.pathname.length === 1){
+        } else {
+            if (to.length === 1 && location.pathname.length === 1) {
                 return theme.button.hover
-            }else {
+            } else {
                 if (isHovered) {
                     return theme.button.main
                 } else {
@@ -26,7 +26,7 @@ export const NLink = ({text, to = '/' }) => {
         <NavLink
             style={{
                 ...theme.navLink,
-                color:linkActivityHandler(),
+                color: linkActivityHandler(),
 
             }}
             to={to}

@@ -1,6 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { selectGetFavorites } from "@store/selectors.js";
+import {useSelector} from "react-redux";
+import {selectGetFavorites} from "@store/selectors.js";
 import VehicleCard from "@components/UI/VehicleCard.jsx";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -23,7 +23,9 @@ export const FavoritesPage = () => {
         >
             <PrimaryButton
                 text='Back'
-                onClick={() => {navigate(-1)}}
+                onClick={() => {
+                    navigate(-1)
+                }}
                 sx={{
                     position: 'absolute',
                     top: '120px',
@@ -32,7 +34,7 @@ export const FavoritesPage = () => {
             />
             {favorites.length > 0 ? (
                 favorites.map((item) => (
-                    <VehicleCard sx={{maxWidth:'70%'}} key={item.id} camper={item} />
+                    <VehicleCard sx={{maxWidth: '70%'}} key={item.id} camper={item}/>
                 ))
             ) : (
                 <Typography variant="h6" color="textSecondary">

@@ -13,7 +13,7 @@ import {setAllFilters} from "@store/slices/filtersSlice.js";
 import {useGetFilters} from "@store/selectors.js";
 import Heading from "@components/UI/Heading.jsx";
 import {fetchCampers} from "@api/apiService.js";
-import {resetCampers, resetPagination, selectCampers, selectPagination} from "@store/slices/campersSlice.js";
+import {resetCampers, resetPagination} from "@store/slices/campersSlice.js";
 import {getActiveFilters} from "@/utils/functions.js";
 
 

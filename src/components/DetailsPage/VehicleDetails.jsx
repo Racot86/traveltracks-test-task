@@ -8,12 +8,12 @@ const VehicleDetails = ({camper}) => {
         display: "flex",
     }
     const ulStyle = {
-        padding:0,
-        margin:0,
+        padding: 0,
+        margin: 0,
     }
     return (
-        <Box sx={{marginTop:'auto'}}>
-            <Heading sx={{marginBottom:'24px'}} text='Vehicle Details' />
+        <Box sx={{marginTop: 'auto'}}>
+            <Heading sx={{marginBottom: '24px'}} text='Vehicle Details'/>
             <Box sx={ulStyle} component='ul'>
                 <li style={liStyle}>
                     <Typography>

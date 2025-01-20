@@ -13,7 +13,7 @@ export const theme = {
     },
     input: '#F7F7F7',
     font: {
-        basic:{
+        basic: {
             fontFamily: 'Inter, Arial, sans-serif',
             fontSize: '16px',
         },
@@ -26,25 +26,25 @@ export const theme = {
             fontWeight: 500,
             lineHeight: '24px',
         },
-        h1:{
+        h1: {
             fontSize: '48px',
             fontWeight: 600,
             lineHeight: '32px',
         },
-        h2:{
+        h2: {
             fontSize: '24px',
             fontWeight: 600,
             lineHeight: '32px',
         },
-        button:{
+        button: {
             fontSize: '16px',
             fontWeight: 500,
             lineHeight: '24px',
         }
     },
-    navLink:{
+    navLink: {
         textDecoration: 'none',
         color: '#475467',
-        transition:'0.3s ease-in-out'
+        transition: '0.3s ease-in-out'
     }
 };

@@ -9,11 +9,11 @@ const Review = ({review}) => {
              sx={{
                  flexGrow: 1,
                  maxWidth: "631px",
-            }}
+             }}
         >
             <Box
                 component='div'
-                sx={{display:'flex'}}
+                sx={{display: 'flex'}}
             >
                 <Box
                     component='div'
@@ -23,7 +23,7 @@ const Review = ({review}) => {
                         height: "60px",
                         alignItems: "center",
                         justifyContent: "center",
-                        borderRadius:'60px',
+                        borderRadius: '60px',
                         backgroundColor: theme.badges,
                     }}
                 >
@@ -35,7 +35,7 @@ const Review = ({review}) => {
                     <Typography>
                         {review.reviewer_name}
                     </Typography>
-                    <Rating value={review.reviewer_rating} max={5} />
+                    <Rating value={review.reviewer_rating} max={5}/>
                 </Box>
             </Box>
             <Typography>

@@ -1,10 +1,10 @@
 import * as Yup from 'yup';
-import {Form, Formik, useFormik} from "formik";
+import {Form, Formik} from "formik";
 import {InputAdornment, TextField} from "@mui/material";
 import {PrimaryButton} from "@components/UI/PrimaryButton.jsx";
 import PrimaryCard from "@components/UI/PrimaryCard.jsx";
 import {theme} from "@theme/theme.js";
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DatePicker} from "@mui/x-date-pickers";
 import Typography from "@mui/material/Typography";
@@ -45,7 +45,7 @@ const BookForm = () => {
         '& .MuiInputLabel-root.Mui-error': {
             color: theme.button.hover, // Error label color
         },
-        '& .MuiInputBase-input':{
+        '& .MuiInputBase-input': {
             color: theme.text,
         },
         '& .MuiOutlinedInput-root': {
@@ -69,24 +69,24 @@ const BookForm = () => {
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <PrimaryCard
-            padding='44px 57px'
-            radius='10px'
-            borderColor={theme.lightGray}
-        >
-            <Typography sx={{marginBottom:'8px'}}>
-                Book your campervan now
-            </Typography>
-            <Typography sx={{marginBottom:'24px'}}>
-                Stay connected! We are always ready to help you.
-            </Typography>
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={handleSubmit}
+            <PrimaryCard
+                padding='44px 57px'
+                radius='10px'
+                borderColor={theme.lightGray}
             >
-                {({setFieldValue,errors, touched, handleChange, handleBlur, values }) => (
-                    <Form style={{display: 'flex', flexDirection: 'column',alignItems:'center', rowGap:'14px'}}>
+                <Typography sx={{marginBottom: '8px'}}>
+                    Book your campervan now
+                </Typography>
+                <Typography sx={{marginBottom: '24px'}}>
+                    Stay connected! We are always ready to help you.
+                </Typography>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={handleSubmit}
+                >
+                    {({setFieldValue, errors, touched, handleChange, handleBlur, values}) => (
+                        <Form style={{display: 'flex', flexDirection: 'column', alignItems: 'center', rowGap: '14px'}}>
 
                             {/* Name Field */}
                             <TextField
@@ -147,29 +147,29 @@ const BookForm = () => {
                                 }}
                             />
 
-                        <DatePicker
-                            label="Date"
-                            value={values.date}
-                            onChange={(newValue) => setFieldValue("date", newValue)}
-                            slotProps={{
-                                textField: {
-                                    name: "date",
-                                    onBlur: handleBlur,
-                                    error: touched.date && !!errors.date,
-                                    helperText: touched.date && errors.date,
-                                    fullWidth: true,
-                                    sx: textFieldStyles,
-                                },
-                                openPickerIcon: {
-                                    sx: {
-                                        color: theme.text, // Customize the icon color
+                            <DatePicker
+                                label="Date"
+                                value={values.date}
+                                onChange={(newValue) => setFieldValue("date", newValue)}
+                                slotProps={{
+                                    textField: {
+                                        name: "date",
+                                        onBlur: handleBlur,
+                                        error: touched.date && !!errors.date,
+                                        helperText: touched.date && errors.date,
+                                        fullWidth: true,
+                                        sx: textFieldStyles,
                                     },
-                                },
-                            }}
-                        />
+                                    openPickerIcon: {
+                                        sx: {
+                                            color: theme.text, // Customize the icon color
+                                        },
+                                    },
+                                }}
+                            />
 
 
-                        <TextField
+                            <TextField
                                 label="Comment"
                                 name="comment"
                                 value={values.comment}
@@ -183,13 +183,13 @@ const BookForm = () => {
                                 sx={textFieldStyles}
                             />
 
-                            <PrimaryButton sx={{marginTop:'10px', maxWidth:'166px'}} type="submit" text="Send" />
+                            <PrimaryButton sx={{marginTop: '10px', maxWidth: '166px'}} type="submit" text="Send"/>
 
-                    </Form>
-                )}
-            </Formik>
-        </PrimaryCard>
-            </LocalizationProvider>
+                        </Form>
+                    )}
+                </Formik>
+            </PrimaryCard>
+        </LocalizationProvider>
     )
 }
 export default BookForm

@@ -3,15 +3,15 @@ import icoStar from "@assets/ico-star.svg";
 import Typography from "@mui/material/Typography";
 import icoMap from "@assets/ico-map.svg";
 
-const RatingAndLocation = ({sx, camper})=>{
+const RatingAndLocation = ({sx, camper}) => {
     const reviewsTextFormatting = (reviews) => {
-        if (reviews > 0){
-            if (reviews > 1){
+        if (reviews > 0) {
+            if (reviews > 1) {
                 return `(${reviews} Reviews)`;
-            }else {
+            } else {
                 return `(${reviews} Review)`;
             }
-        }else {
+        } else {
             return ''
         }
     }
@@ -21,7 +21,7 @@ const RatingAndLocation = ({sx, camper})=>{
             component='div'
             sx={{
                 display: 'flex',
-                gap:'16px',
+                gap: '16px',
                 alignItems: 'center',
                 ...sx
             }}
@@ -34,7 +34,7 @@ const RatingAndLocation = ({sx, camper})=>{
                 }}
             >
                 <Box component='img' src={icoStar} sx={{}}/>
-                <Typography sx={{textDecoration:'underline'}}>
+                <Typography sx={{textDecoration: 'underline'}}>
                     {`${camper.rating}${reviewsTextFormatting(camper.reviews.length)}`}
                 </Typography>
             </Box>
@@ -42,11 +42,11 @@ const RatingAndLocation = ({sx, camper})=>{
                 component='div'
                 sx={{
                     display: 'flex',
-                    gap:'4px',
+                    gap: '4px',
                     alignItems: 'center',
                 }}
             >
-                <Box component='img' src={icoMap} sx={{width:'16px', height:'16px'}}/>
+                <Box component='img' src={icoMap} sx={{width: '16px', height: '16px'}}/>
                 <Typography>
                     {camper.location}
                 </Typography>

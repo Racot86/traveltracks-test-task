@@ -6,7 +6,9 @@ const TabList = ({sx, value, valueHandler}) => {
     return (
         <Tabs
             value={value}
-            onChange={(e,newVal)=>{valueHandler(newVal)}}
+            onChange={(e, newVal) => {
+                valueHandler(newVal)
+            }}
             sx={{
                 position: 'relative',
                 '&::after': {
@@ -25,8 +27,8 @@ const TabList = ({sx, value, valueHandler}) => {
                 ...sx
             }}
         >
-            <Tab label="Features"  />
-            <Tab label="Reviews"  />
+            <Tab label="Features"/>
+            <Tab label="Reviews"/>
         </Tabs>
     )
 }

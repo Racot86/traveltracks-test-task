@@ -17,11 +17,11 @@ const handleFulfilled = (state) => {
 const campersSlice = createSlice({
     name: 'campers',
     initialState: {
-        campers:{},
+        camper: {},
         items: [],
         isLoading: false,
         error: null,
-        pagination:{
+        pagination: {
             page: 1,
             per_page: 4,
             total: 0,
@@ -49,14 +49,14 @@ const campersSlice = createSlice({
             .addCase(fetchCampers.rejected, handleError)
             .addCase(fetchCampers.fulfilled, (state, action) => {
                 handleFulfilled(state)
-                state.items = [...state.items,...action.payload.items] ;
+                state.items = [...state.items, ...action.payload.items];
                 state.pagination.total = action.payload.total;
             })
             .addCase(fetchCampersById.pending, handleLoading)
             .addCase(fetchCampersById.rejected, handleError)
             .addCase(fetchCampersById.fulfilled, (state, action) => {
-                handleFulfilled(state)
                 state.camper = action.payload;
+                handleFulfilled(state)
             })
 
     },
@@ -65,7 +65,8 @@ const campersSlice = createSlice({
 export const selectCampers = (state) => state.campers.items;
 export const selectCamper = (state) => state.campers.camper;
 export const selectPagination = (state) => state.campers.pagination;
+export const selectCampersQuery = (state) => state.campers;
 
-export const { setPage, resetPagination,resetCampers } = campersSlice.actions;
+export const {setPage, resetPagination, resetCampers} = campersSlice.actions;
 
 export default campersSlice.reducer;

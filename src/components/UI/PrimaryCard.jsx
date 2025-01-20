@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import {theme} from "@theme/theme.js";
 
-const PrimaryCard = ({bgColor="white", radius="2px",padding="10px",borderColor="black", children,sx})=>{
+const PrimaryCard = ({bgColor = "white", radius = "2px", padding = "10px", borderColor = "black", children, sx}) => {
     return (
         <Box
             component="div"
