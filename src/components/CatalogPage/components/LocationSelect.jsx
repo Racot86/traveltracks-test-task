@@ -23,10 +23,10 @@ const LocationSelect = ({value, setValue, ...props}) => {
         <>
             <Select
 
-                displayEmpty // Ensure empty values render using renderValue
+                displayEmpty
                 renderValue={(selected) => {
                     if (!selected) {
-                        // Handle empty value
+
                         return (
                             <Box sx={{
                                 background: theme.input,
@@ -46,9 +46,9 @@ const LocationSelect = ({value, setValue, ...props}) => {
                                     sx={{
                                         width: 20,
                                         height: 20,
-                                        color: "red", // This works for some SVGs
+                                        color: "red",
                                         "& path": {
-                                            fill: "red", // Ensure path inside SVG is targeted
+                                            fill: "red",
                                         },
                                     }}
                                 />
@@ -77,14 +77,13 @@ const LocationSelect = ({value, setValue, ...props}) => {
                                     component="img"
                                     src={mapIco}
                                     alt="Map Icon"
-                                    sx={{width: 20, height: 20}} // Set icon dimensions
+                                    sx={{width: 20, height: 20}}
                                 />
                                 {location}
                             </Box>
                         );
                     }
 
-                    // Handle selected value
 
                 }}
                 value={location}
@@ -93,14 +92,14 @@ const LocationSelect = ({value, setValue, ...props}) => {
                     borderRadius: '12px',
                     background: theme.input,
                     "& .MuiOutlinedInput-notchedOutline": {
-                        border: `1px solid ${theme.input}`, // Custom border color
-                        borderRadius: "12px", // Custom border radius
+                        border: `1px solid ${theme.input}`,
+                        borderRadius: "12px",
                     },
                     "&:hover .MuiOutlinedInput-notchedOutline": {
-                        borderColor: theme.input, // Hover border color
+                        borderColor: theme.input,
                     },
                     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                        borderColor: theme.input, // Focused border color
+                        borderColor: theme.input,
                     },
                 }}
                 {...props}

@@ -18,7 +18,7 @@ import {getActiveFilters} from "@/utils/functions.js";
 
 
 const SearchPane = () => {
-    // Track the selected location
+
     const dispatch = useDispatch();
     const filtersData = useSelector(useGetFilters);
     const [filters, setFilters] = useState(filtersData);
@@ -34,7 +34,7 @@ const SearchPane = () => {
     const handleSearchClick = async () => {
 
 
-        await dispatch(setAllFilters(filters));// Reset pagination
+        await dispatch(setAllFilters(filters));
         await dispatch(resetCampers());
         await dispatch(resetPagination());
 
@@ -48,7 +48,7 @@ const SearchPane = () => {
     return (
         <>
             <form
-                onSubmit={(e) => e.preventDefault()} // Prevent form submission
+                onSubmit={(e) => e.preventDefault()}
                 style={{
                     display: "flex",
                     flexDirection: "column",

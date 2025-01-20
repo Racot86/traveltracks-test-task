@@ -8,7 +8,7 @@ import PrimaryButton from "@components/UI/PrimaryButton.jsx";
 import {useNavigate} from "react-router-dom";
 
 export const FavoritesPage = () => {
-    const favorites = useSelector(selectGetFavorites); // Directly use the Redux selector
+    const favorites = useSelector(selectGetFavorites);
     const navigate = useNavigate();
     return (
         <Box

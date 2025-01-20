@@ -13,7 +13,7 @@ export const getActiveFilters = (filters) => {
         ) {
             const value = filters[key];
             if ((typeof value === "string" && value !== "") || value === true) {
-                activeFilters[key] = value; // Add key and value to active filters
+                activeFilters[key] = value;
             }
         }
         return activeFilters;

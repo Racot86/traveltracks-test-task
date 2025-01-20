@@ -38,17 +38,17 @@ const BookForm = () => {
     const textFieldStyles = {
         '& .MuiOutlinedInput-root.Mui-error': {
             '& fieldset': {
-                borderColor: theme.input, // Custom error border color
+                borderColor: theme.input,
             },
         },
         '& .MuiInputLabel-root': {
-            color: theme.text, // Default label color
+            color: theme.text,
         },
         '& .MuiInputLabel-root.Mui-focused': {
-            color: theme.text, // Focused label color
+            color: theme.text,
         },
         '& .MuiInputLabel-root.Mui-error': {
-            color: theme.button.hover, // Error label color
+            color: theme.button.hover,
         },
         '& .MuiInputBase-input': {
             color: theme.text
@@ -61,13 +61,13 @@ const BookForm = () => {
 
             },
             '&:hover fieldset': {
-                borderColor: theme.input, //// Customize hover border color
+                borderColor: theme.input,
             },
             '&.Mui-focused fieldset': {
-                borderColor: theme.input, // Customize focus border color
+                borderColor: theme.input,
             },
             '& .Mui-error': {
-                background: theme.button.hover, // Error label color
+                background: theme.button.hover,
             },
 
         },
@@ -168,7 +168,7 @@ const BookForm = () => {
                                     },
                                     openPickerIcon: {
                                         sx: {
-                                            color: theme.text, // Customize the icon color
+                                            color: theme.text,
                                         },
                                     },
                                 }}
