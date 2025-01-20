@@ -10,9 +10,9 @@ import {theme} from "@theme/theme.js";
 import {InputLabel} from "@mui/material";
 
 
-const LocationSelect = ({setValue, ...props}) => {
+const LocationSelect = ({value, setValue, ...props}) => {
 
-    const [location, setLocation] = useState('');
+    const [location, setLocation] = useState(value);
     const locations = useSelector(selectGetLocations)
     const handleChange = (event) => {
         setLocation(event.target.value);
