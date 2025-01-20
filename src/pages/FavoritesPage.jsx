@@ -1,10 +1,10 @@
-import React from "react";
+
 import {useSelector} from "react-redux";
 import {selectGetFavorites} from "@store/selectors.js";
 import VehicleCard from "@components/UI/VehicleCard.jsx";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import {PrimaryButton} from "@components/UI/PrimaryButton.jsx";
+import PrimaryButton from "@components/UI/PrimaryButton.jsx";
 import {useNavigate} from "react-router-dom";
 
 export const FavoritesPage = () => {

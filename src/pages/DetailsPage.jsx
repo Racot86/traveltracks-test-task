@@ -1,9 +1,8 @@
 import Box from "@mui/material/Box";
 import {useNavigate, useParams} from "react-router-dom";
-
 import RatingAndLocation from "@components/UI/RatingAndLocation.jsx";
 import Typography from "@mui/material/Typography";
-import {PrimaryButton} from "@components/UI/PrimaryButton.jsx";
+import PrimaryButton from "@components/UI/PrimaryButton.jsx";
 import TabList from "@components/DetailsPage/TabList.jsx";
 import {useEffect, useState} from "react";
 import TabPanels from "@components/DetailsPage/TabPanels.jsx";
@@ -12,13 +11,14 @@ import ImageViewer from "@components/UI/ImageViewer.jsx";
 import {fetchCampersById} from "@api/apiService.js";
 import {useDispatch, useSelector} from "react-redux";
 import {selectCampersQuery} from "@store/slices/campersSlice.js";
+import {CircularProgress} from "@mui/material";
+import {theme} from "@theme/theme.js";
 
 
 const DetailsPage = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
     const [tabValue, setTabValue] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [imageSrc, setImageSrc] = useState(null);
@@ -33,7 +33,9 @@ const DetailsPage = () => {
         setImageSrc(image);
         setIsModalOpen(true);
     }
+
     const handleClose = () => setIsModalOpen(false);
+
     return (
 
         <Box
@@ -58,9 +60,11 @@ const DetailsPage = () => {
             />
             {!isLoading && !error && Object.keys(camper).length ? (
                 <>
-                    {camper.name}
+                    <Typography sx={{...theme.font.h2}}>
+                        {camper.name}
+                    </Typography>
                     <RatingAndLocation sx={{paddingTop: '8px', paddingBottom: '16px'}} camper={camper}/>
-                    <Typography>
+                    <Typography sx={{...theme.font.h2}}>
                         {`€${camper.price}`}
                     </Typography>
                     <Box
@@ -102,7 +106,7 @@ const DetailsPage = () => {
                             </Box>
                         ))}
                     </Box>
-                    <Typography sx={{marginBottom: '60px'}}>
+                    <Typography sx={{marginBottom: '60px',color: theme.text}}>
                         {camper.description}
                     </Typography>
                     <TabList sx={{marginBottom: '44px'}} value={tabValue} valueHandler={setTabValue}/>
@@ -126,7 +130,7 @@ const DetailsPage = () => {
 
                     <ImageViewer open={isModalOpen} handleClose={handleClose} imageSrc={imageSrc}/>
                 </>
-            ) : <p>Loading</p>}
+            ) : <CircularProgress sx={{marginLeft: 'auto', marginRight: 'auto'}}/>}
         </Box>
     )
 }

@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import {Form, Formik} from "formik";
 import {InputAdornment, TextField} from "@mui/material";
-import {PrimaryButton} from "@components/UI/PrimaryButton.jsx";
+import PrimaryButton from "@components/UI/PrimaryButton.jsx";
 import PrimaryCard from "@components/UI/PrimaryCard.jsx";
 import {theme} from "@theme/theme.js";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
@@ -9,6 +9,8 @@ import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DatePicker} from "@mui/x-date-pickers";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import ModalFormSubmit from "@components/UI/ModalFormSubmit.jsx";
+import {useState} from "react";
 
 const validationSchema = Yup.object({
     name: Yup.string().required('Name is required'),
@@ -19,6 +21,8 @@ const validationSchema = Yup.object({
 });
 
 const BookForm = () => {
+    const [isOpen, setOpen] = useState(false);
+
     const initialValues = {
         name: '',
         email: '',
@@ -26,6 +30,7 @@ const BookForm = () => {
         comment: '',
     };
     const handleSubmit = (values) => {
+        setOpen(true);
         console.log('Form Data:', values);
     };
 
@@ -46,10 +51,11 @@ const BookForm = () => {
             color: theme.button.hover, // Error label color
         },
         '& .MuiInputBase-input': {
-            color: theme.text,
+            color: theme.text
         },
         '& .MuiOutlinedInput-root': {
             backgroundColor: theme.input,
+            borderRadius:'12px',
             '& fieldset': {
                 borderColor: theme.input,
 
@@ -74,10 +80,10 @@ const BookForm = () => {
                 radius='10px'
                 borderColor={theme.lightGray}
             >
-                <Typography sx={{marginBottom: '8px'}}>
+                <Typography sx={{marginBottom: '8px',...theme.font.h3,color:theme.primary}}>
                     Book your campervan now
                 </Typography>
-                <Typography sx={{marginBottom: '24px'}}>
+                <Typography sx={{marginBottom: '24px',color:theme.text}}>
                     Stay connected! We are always ready to help you.
                 </Typography>
                 <Formik
@@ -90,7 +96,7 @@ const BookForm = () => {
 
                             {/* Name Field */}
                             <TextField
-                                label="Name"
+                                label="Name*"
                                 name="name"
                                 value={values.name}
                                 onChange={handleChange}
@@ -148,7 +154,7 @@ const BookForm = () => {
                             />
 
                             <DatePicker
-                                label="Date"
+                                label="Date*"
                                 value={values.date}
                                 onChange={(newValue) => setFieldValue("date", newValue)}
                                 slotProps={{
@@ -188,6 +194,7 @@ const BookForm = () => {
                         </Form>
                     )}
                 </Formik>
+                <ModalFormSubmit open={isOpen} handleClose={()=>setOpen(false)} />
             </PrimaryCard>
         </LocalizationProvider>
     )

@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {theme} from "@theme/theme.js";
 import {useEffect} from "react";
+import PropTypes from "prop-types";
 
 const FilterCheckBox = ({data, filters, setFilters}) => {
     const icons = import.meta.glob('/src/assets/filterIcons/*.svg', {eager: true});
@@ -93,5 +94,10 @@ const FilterCheckBox = ({data, filters, setFilters}) => {
         </Box>
     );
 };
+FilterCheckBox.propTypes = {
+    data: PropTypes.object.isRequired,
+    filters: PropTypes.object.isRequired,
+    setFilters: PropTypes.func.isRequired,
+}
 
 export default FilterCheckBox;

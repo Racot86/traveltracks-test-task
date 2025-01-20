@@ -1,8 +1,9 @@
-import {theme} from "../../theme/theme.js";
+import {theme} from "@theme/theme.js";
 import {NavLink, useLocation} from "react-router-dom";
 import {useState} from "react";
+import PropTypes from "prop-types";
 
-export const NLink = ({text, to = '/'}) => {
+const NLink = ({text, to = '/'}) => {
     const location = useLocation();
     const [isHovered, setIsHovered] = useState(false);
 
@@ -35,3 +36,10 @@ export const NLink = ({text, to = '/'}) => {
         >{text}</NavLink>
     )
 }
+
+NLink.propTypes = {
+    text: PropTypes.string.isRequired,
+    to: PropTypes.string,
+}
+
+export default NLink;

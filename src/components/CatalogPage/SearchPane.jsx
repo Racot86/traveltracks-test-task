@@ -3,7 +3,7 @@ import {theme} from "@theme/theme.js";
 import Box from "@mui/material/Box";
 import FilterCheckBox from "./components/FilterCheckBox.jsx";
 import {filterCheckBoxData} from "@constants/filterCheckBoxData.js";
-import {PrimaryButton} from "@components/UI/PrimaryButton.jsx";
+import PrimaryButton from "@components/UI/PrimaryButton.jsx";
 
 import {useEffect, useState} from "react";
 import LocationSelect from "@components/CatalogPage/components/LocationSelect.jsx";
@@ -40,7 +40,7 @@ const SearchPane = () => {
 
         await dispatch(fetchCampers({page: 1, limit: 4, filters: getActiveFilters(filters)}));
 
-        console.log("filters", filters);
+
 
 
     };
@@ -68,7 +68,7 @@ const SearchPane = () => {
 
                 {/* Filters Section */}
                 <Box component="div" sx={{marginBottom: '40px'}}>
-                    <Typography>Filters</Typography>
+                    <Typography sx={{marginBottom:'32px',...theme.font.body2}}>Filters</Typography>
                     <Box component="div">
                         <Heading text='Vehicle equipment'/>
                         <Box

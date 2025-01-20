@@ -1,15 +1,21 @@
 import Box from "@mui/material/Box";
 import Heading from "@components/UI/Heading.jsx";
 import Typography from "@mui/material/Typography";
+import PropTypes from "prop-types";
+import {theme} from "@theme/theme.js";
 
 const VehicleDetails = ({camper}) => {
-    console.log(camper);
+
     const liStyle = {
         display: "flex",
     }
     const ulStyle = {
         padding: 0,
         margin: 0,
+        ...theme.font.body2,
+        display: "flex",
+        flexDirection: "column",
+        rowGap: '16px',
     }
     return (
         <Box sx={{marginTop: 'auto'}}>
@@ -67,4 +73,8 @@ const VehicleDetails = ({camper}) => {
         </Box>
     )
 }
+VehicleDetails.propTypes = {
+    camper: PropTypes.object.isRequired,
+};
+
 export default VehicleDetails;

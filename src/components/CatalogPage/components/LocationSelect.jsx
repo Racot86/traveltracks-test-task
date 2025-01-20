@@ -7,6 +7,7 @@ import {useState} from "react";
 import Box from "@mui/material/Box";
 import mapIco from '@assets/ico-map.svg'
 import {theme} from "@theme/theme.js";
+import PropTypes from "prop-types";
 
 
 const LocationSelect = ({value, setValue, ...props}) => {
@@ -84,17 +85,7 @@ const LocationSelect = ({value, setValue, ...props}) => {
                     }
 
                     // Handle selected value
-                    return (
-                        <Box display="flex" alignItems="center" gap="8px">
-                            <Box
-                                component="img"
-                                src={mapIco}
-                                alt="Map Icon"
-                                sx={{width: 20, height: 20}} // Set icon dimensions
-                            />
-                            {selected}
-                        </Box>
-                    );
+
                 }}
                 value={location}
                 onChange={handleChange}
@@ -126,6 +117,10 @@ const LocationSelect = ({value, setValue, ...props}) => {
             </Select>
         </>
     );
+}
+LocationSelect.propTypes = {
+    setValue: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired,
 }
 
 export default LocationSelect;

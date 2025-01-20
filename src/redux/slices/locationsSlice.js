@@ -21,15 +21,6 @@ const locationsSlice = createSlice({
         error: null,
         locations: [],
     },
-    reducers: {
-        setLocations: (state, action) => {
-            state.locations = action.payload;
-        },
-        resetLocations: (state) => {
-            state.locations = [];
-        },
-
-    },
     extraReducers: builder => {
         builder
             .addCase(fetchLocations.pending, handleLoading)
@@ -43,6 +34,5 @@ const locationsSlice = createSlice({
     },
 });
 
-export const {setLocations, resetLocations} = locationsSlice.actions;
 
 export default locationsSlice.reducer;

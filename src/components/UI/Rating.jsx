@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import blankStar from '@assets/ico-star-blank.svg'
 import star from '@assets/ico-star.svg'
+import PropTypes from "prop-types";
 
 const Rating = ({value, max}) => {
 
@@ -16,4 +17,9 @@ const Rating = ({value, max}) => {
         </Box>
     )
 }
+Rating.propTypes = {
+    value: PropTypes.number.isRequired,
+    max: PropTypes.number.isRequired,
+}
+
 export default Rating;

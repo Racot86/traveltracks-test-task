@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import background from '../assets/HomePage/background.jpg'
 import {theme} from "../theme/theme.js";
 import Typography from "@mui/material/Typography";
-import {PrimaryButton} from "../components/UI/PrimaryButton.jsx";
+import PrimaryButton from "../components/UI/PrimaryButton.jsx";
 import {useNavigate} from "react-router-dom";
 
 export const HomePage = () => {

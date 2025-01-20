@@ -5,6 +5,7 @@ const handleLoading = (state) => {
     state.isLoading = true;
     state.error = null;
 }
+
 const handleError = (state, action) => {
     state.isLoading = false;
     state.error = action.payload;
@@ -20,6 +21,7 @@ const campersSlice = createSlice({
         camper: {},
         items: [],
         isLoading: false,
+        LoadMoreLoading: false,
         error: null,
         pagination: {
             page: 1,
@@ -63,7 +65,7 @@ const campersSlice = createSlice({
 });
 
 export const selectCampers = (state) => state.campers.items;
-export const selectCamper = (state) => state.campers.camper;
+
 export const selectPagination = (state) => state.campers.pagination;
 export const selectCampersQuery = (state) => state.campers;
 

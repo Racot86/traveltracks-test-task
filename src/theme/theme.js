@@ -23,6 +23,7 @@ export const theme = {
             lineHeight: '24px',
         },
         body2: {
+            fontSize: '16px',
             fontWeight: 500,
             lineHeight: '24px',
         },
@@ -35,6 +36,11 @@ export const theme = {
             fontSize: '24px',
             fontWeight: 600,
             lineHeight: '32px',
+        },
+        h3:{
+            fontSize: '20px',
+            fontWeight: 600,
+            lineHeight: '24px'
         },
         button: {
             fontSize: '16px',

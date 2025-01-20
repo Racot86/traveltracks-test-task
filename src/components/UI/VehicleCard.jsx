@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import icoFavorite from "@assets/ico-favorite.svg";
 import icoFavoritePressed from "@assets/ico-favorite-pressed.svg";
 import ChipsPack from "@components/UI/ChipsPack.jsx";
-import {PrimaryButton} from "@components/UI/PrimaryButton.jsx";
+import PrimaryButton from "@components/UI/PrimaryButton.jsx";
 import {useNavigate} from "react-router-dom";
 import RatingAndLocation from "@components/UI/RatingAndLocation.jsx";
 import {useDispatch, useSelector} from "react-redux";
@@ -16,7 +16,6 @@ import PropTypes from "prop-types";
 const VehicleCard = ({sx, camper}) => {
     const dispatch = useDispatch();
     const isFavorite = useSelector((state) => isFavoritePresent(state, camper.id));
-
     const navigate = useNavigate();
 
     const navigateToDetails = () => {
@@ -32,75 +31,101 @@ const VehicleCard = ({sx, camper}) => {
     }
 
 
-    return (<Box
-        component="div"
-        sx={{
-            display: "flex",
-            padding: "24px",
-            border: `1px solid ${theme.lightGray}`,
-            borderRadius: "20px",
-            gap: "24px",
-            width: "100%", ...sx
-        }}
-    >
+    return (
         <Box
-            component="img"
-            src={camper.gallery[0].thumb}
+            component="li"
             sx={{
-                width: "292px", height: "320px", objectFit: "cover", borderRadius: "10px",
-            }}
-        />
-        <Box
-            component="div"
-            sx={{
-                display: "flex", flexDirection: "column", width: "100%",
+                display: "flex",
+                padding: "24px",
+                border: `1px solid ${theme.lightGray}`,
+                borderRadius: "20px",
+                gap: "24px",
+                width: "100%",
+                maxWidth:'888px',
+                maxHeight:"368px",
+                height:"100%",
+                ...sx
             }}
         >
             <Box
+                component="img"
+                src={camper.gallery[0].thumb}
+                sx={{
+                    width: "292px",
+                    height: "320px",
+                    objectFit: "cover",
+                    borderRadius: "10px",
+                }}
+            />
+            <Box
                 component="div"
                 sx={{
-                    display: "flex", width: "100%", marginBottom: "8px",
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "100%",
                 }}
             >
-                <Typography>{camper.name}</Typography>
                 <Box
                     component="div"
                     sx={{
-                        display: "flex", gap: "6px", marginLeft: "auto",
+                        display: "flex",
+                        width: "100%",
+                        marginBottom: "8px",
+
                     }}
                 >
-                    <Typography>{`€${camper.price}`}</Typography>
+                    <Typography
+                        sx={{...theme.font.h2,color:theme.primary}}
+                    >
+                        {camper.name}
+                    </Typography>
                     <Box
-                        onClick={handleFavoriteClick}
-                        component="img"
-                        src={isFavorite ? icoFavoritePressed : icoFavorite}
+                        component="div"
                         sx={{
-                            width: "24px", height: "24px", cursor: "pointer",
+                            display: "flex",
+                            gap: "6px",
+                            marginLeft: "auto",
+                            alignItems: "center",
                         }}
-                    />
+                    >
+                        <Typography
+                            sx={{...theme.font.h2,color:theme.primary}}
+                        >
+                            {`€${camper.price}`}
+                        </Typography>
+                        <Box
+                            onClick={handleFavoriteClick}
+                            component="img"
+                            src={isFavorite ? icoFavoritePressed : icoFavorite}
+                            sx={{
+                                width: "24px", height: "24px", cursor: "pointer",
+                            }}
+                        />
+                    </Box>
                 </Box>
+                <RatingAndLocation camper={camper}/>
+                <Typography
+                    noWrap
+                    sx={{
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                        maxWidth: "525px",
+                        paddingTop: "24px",
+                        paddingBottom: "24px",
+                        color:theme.text,
+                    }}
+                >
+                    {camper.description}
+                </Typography>
+                <ChipsPack max={8} camper={camper}/>
+                <PrimaryButton
+                    onClick={navigateToDetails}
+                    sx={{marginTop: "auto", maxWidth: "173px"}}
+                    text="Show more"
+                />
             </Box>
-            <RatingAndLocation camper={camper}/>
-            <Typography
-                noWrap
-                sx={{
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                    maxWidth: "525px",
-                    paddingTop: "24px",
-                    paddingBottom: "24px",
-                }}
-            >
-                {camper.description}
-            </Typography>
-            <ChipsPack camper={camper}/>
-            <PrimaryButton
-                onClick={navigateToDetails}
-                sx={{marginTop: "auto", maxWidth: "173px"}}
-                text="Show more"
-            />
         </Box>
-    </Box>);
+    );
 };
 
 VehicleCard.propTypes = {

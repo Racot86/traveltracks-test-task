@@ -1,7 +1,8 @@
-import {Button} from "@mui/material";
-import {theme} from "../../theme/theme.js";
+import {Button, CircularProgress} from "@mui/material";
+import {theme} from "@theme/theme.js";
+import PropTypes from "prop-types";
 
-export const PrimaryButton = ({text, sx, variant = 'filled', ...props}) => {
+const PrimaryButton = ({loading=false, text, sx, variant = 'filled', ...props}) => {
 
     const filledStyle = {
         background: theme.button.main,
@@ -29,7 +30,16 @@ export const PrimaryButton = ({text, sx, variant = 'filled', ...props}) => {
             sx={variant === 'outlined' ? outlinedStyle : filledStyle}
             {...props}
         >
-            {text}
+            {loading ? <CircularProgress />:text}
+
         </Button>
     )
 }
+PrimaryButton.propTypes = {
+    variant: PropTypes.string,
+    text: PropTypes.string.isRequired,
+    sx: PropTypes.object,
+    loading: PropTypes.bool,
+}
+
+export default PrimaryButton;

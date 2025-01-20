@@ -1,5 +1,6 @@
 import {Box, IconButton, Modal} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import PropTypes from "prop-types";
 
 const ImageViewer = ({imageSrc, open, handleClose}) => {
     return (
@@ -42,5 +43,10 @@ const ImageViewer = ({imageSrc, open, handleClose}) => {
         </Modal>
     );
 };
+ImageViewer.propTypes = {
+    imageSrc: PropTypes.string,
+    open: PropTypes.bool.isRequired,
+    handleClose: PropTypes.func.isRequired,
+}
 
 export default ImageViewer;

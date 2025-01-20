@@ -24,33 +24,12 @@ const filterSlice = createSlice({
     name: "filters",
     initialState,
     reducers: {
-        toggleFilter: (state, action) => {
-            const filterName = action.payload;
-            if (filterName in state) {
-                state[filterName] = !state[filterName];
-            }
-        },
-        setFilter: (state, action) => {
-            const {name, value} = action.payload;
-            if (name in state) {
-                state[name] = value;
-            }
-        },
-        resetFilters: (state) => {
-            Object.keys(state).forEach((key) => {
-                if (typeof state[key] === "boolean") {
-                    state[key] = false; // Reset boolean filters to false
-                } else if (typeof state[key] === "string") {
-                    state[key] = ""; // Reset string filters to empty string
-                }
-            });
-        },
         setAllFilters: (state, action) => {
             return action.payload;
         },
     },
 });
 
-export const {toggleFilter, setFilter, resetFilters, setAllFilters} = filterSlice.actions;
+export const { setAllFilters} = filterSlice.actions;
 
 export default filterSlice.reducer;

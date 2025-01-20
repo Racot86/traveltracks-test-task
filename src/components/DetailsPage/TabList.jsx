@@ -1,5 +1,6 @@
 import {Tab, Tabs} from "@mui/material";
 import {theme} from "@theme/theme.js";
+import PropTypes from "prop-types";
 
 const TabList = ({sx, value, valueHandler}) => {
 
@@ -14,11 +15,12 @@ const TabList = ({sx, value, valueHandler}) => {
                 '&::after': {
                     content: '""',
                     position: 'absolute',
-                    bottom: 0,
+                    bottom: 2,
                     left: 0,
                     width: '100%',
                     height: '1px',
                     backgroundColor: theme.lightGray,
+                    zIndex: -1,
                 },
                 '& .MuiTabs-indicator': {
                     backgroundColor: theme.button.main,
@@ -27,9 +29,30 @@ const TabList = ({sx, value, valueHandler}) => {
                 ...sx
             }}
         >
-            <Tab label="Features"/>
-            <Tab label="Reviews"/>
+            <Tab
+                sx={{
+                    textTransform: "none",
+                    ...theme.font.h3,
+                    color:theme.primary,
+                    "&.Mui-selected": { color: theme.primary }
+                }}
+                label="Features"
+            />
+            <Tab
+                sx={{
+                    textTransform: "none",
+                    ...theme.font.h3,
+                    color:theme.primary,
+                    "&.Mui-selected": { color: theme.primary }
+                }}
+                label="Reviews"
+            />
         </Tabs>
     )
+}
+TabList.propTypes = {
+    value: PropTypes.number.isRequired,
+    valueHandler: PropTypes.func.isRequired,
+    sx: PropTypes.object,
 }
 export default TabList;

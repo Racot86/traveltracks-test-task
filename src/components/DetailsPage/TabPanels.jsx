@@ -4,6 +4,7 @@ import {theme} from "@theme/theme.js";
 import ChipsPack from "@components/UI/ChipsPack.jsx";
 import VehicleDetails from "@components/DetailsPage/VehicleDetails.jsx";
 import Review from "@components/DetailsPage/Review.jsx";
+import PropTypes from "prop-types";
 
 const TabPanels = ({value, camper, ...other}) => {
     return (
@@ -34,6 +35,12 @@ const TabPanels = ({value, camper, ...other}) => {
                     borderColor={"transparent"}
                     padding={"44px 52px"}
                     radius={'10px'}
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        rowGap:'44px',
+                        overflow:'scroll',
+                    }}
                 >
                     {camper.reviews.map((review, index) => (
                         <Review key={index} review={review}/>
@@ -44,5 +51,9 @@ const TabPanels = ({value, camper, ...other}) => {
 
     );
 };
+TabPanels.propTypes = {
+    value: PropTypes.number.isRequired,
+    camper: PropTypes.object.isRequired,
 
+}
 export default TabPanels;
